@@ -2,6 +2,6 @@
 {
     public class Auction
     {
-        public int Id { get; set; }
+        public String Id { get; set; }
     }
 }

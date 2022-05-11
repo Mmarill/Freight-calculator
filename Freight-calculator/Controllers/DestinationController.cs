@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Freight_calculator.Controllers
 {
+
+    [Route("api/[controller]")]
+    [ApiController]
     public class DestinationController : ControllerBase
     {
         private IDestinations _destinationService;
@@ -15,7 +18,6 @@ namespace Freight_calculator.Controllers
             _destinationService = destinationService;
         }
 
-        // GET: api/VehiclesApiControllers
         // currently returnign a listof strings
         [HttpGet]
         public async Task<IEnumerable<Destination>> Get()
