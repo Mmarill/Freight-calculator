@@ -23,11 +23,8 @@ namespace Freight_calculator.Migrations
 
             modelBuilder.Entity("Freight_calculator.Models.Auction", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
@@ -57,8 +54,8 @@ namespace Freight_calculator.Migrations
                     b.Property<int>("ZipCode")
                         .HasColumnType("int");
 
-                    b.Property<int>("auctionId")
-                        .HasColumnType("int");
+                    b.Property<string>("auctionId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("userId")
                         .HasColumnType("nvarchar(450)");
@@ -90,9 +87,7 @@ namespace Freight_calculator.Migrations
                 {
                     b.HasOne("Freight_calculator.Models.Auction", "auction")
                         .WithMany()
-                        .HasForeignKey("auctionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("auctionId");
 
                     b.HasOne("Freight_calculator.Models.User", "user")
                         .WithMany()

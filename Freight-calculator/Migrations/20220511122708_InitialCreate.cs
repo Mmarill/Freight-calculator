@@ -12,8 +12,7 @@ namespace Freight_calculator.Migrations
                 name: "Auction",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -43,7 +42,7 @@ namespace Freight_calculator.Migrations
                     City = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ZipCode = table.Column<int>(type: "int", nullable: false),
-                    auctionId = table.Column<int>(type: "int", nullable: false)
+                    auctionId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,8 +51,7 @@ namespace Freight_calculator.Migrations
                         name: "FK_Destinations_Auction_auctionId",
                         column: x => x.auctionId,
                         principalTable: "Auction",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Destinations_User_userId",
                         column: x => x.userId,

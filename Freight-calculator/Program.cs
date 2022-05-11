@@ -9,6 +9,7 @@ builder.Services.AddScoped<IDestinations, DestinationService>();
 Location location = new Location();
 Console.WriteLine(location.GetLatLng("Malmö, Sverige"));
 builder.Services.AddControllers();
+builder.Services.AddCors();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

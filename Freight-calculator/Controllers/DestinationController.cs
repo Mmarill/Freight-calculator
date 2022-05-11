@@ -1,10 +1,11 @@
 ﻿using Freight_calculator.Interfaces;
 using Freight_calculator.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Freight_calculator.Controllers
 {
-
+   
     [Route("api/[controller]")]
     [ApiController]
     public class DestinationController : ControllerBase
@@ -19,6 +20,7 @@ namespace Freight_calculator.Controllers
         }
 
         // currently returnign a listof strings
+        [DisableCors]
         [HttpGet]
         public async Task<IEnumerable<Destination>> Get()
         {
