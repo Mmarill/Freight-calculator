@@ -20,7 +20,6 @@ namespace Freight_calculator.Controllers
         }
 
         // currently returnign a listof strings
-        [DisableCors]
         [HttpGet]
         public async Task<IEnumerable<Destination>> Get()
         {
