@@ -16,9 +16,25 @@ namespace Freight_calculator.Services
 
         public async Task AddDestination(Destination destination)
         {
+            Destination tmpDest = destination;
+            Console.WriteLine("DestinationService: ");  // DEBUG
+
             await dbContext.Destinations.AddAsync(destination);
-            await dbContext.SaveChangesAsync();
-        }
+            
+            // Should return an int
+            int res =  await dbContext.SaveChangesAsync();
+            Console.WriteLine("Return (res)", res);
+            if (res != -111)
+            {
+                String addr = tmpDest.City + "," + tmpDest.Country;
+                Location location = new Location();
+                (double, double) gps = location.GetLatLng(addr);
+                Console.WriteLine(gps);
+            }
+            
+                
+                
+            }
 
         public Task Delete(int Id)
         {

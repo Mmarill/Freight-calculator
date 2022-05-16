@@ -11,6 +11,6 @@ namespace Freight_calculator.Models
         public string Country { get; set; }
         public int ZipCode { get; set; }
         public Auction auction { get; set; }
-
+        
     }
 }

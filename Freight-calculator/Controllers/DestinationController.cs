@@ -24,27 +24,28 @@ namespace Freight_calculator.Controllers
         public async Task<IEnumerable<Destination>> Get()
         {
             var destinations = await _destinationService.GetAllDestinations();
-            // get all vehicle methods
+            // get all destinations in db
             // need to use Task
             return destinations;
         }
 
-        // GET: api/VehiclesApiControllers/5
-        // again string so need to change to a vehicle
+        // GET: api/Destination/<id>       
         [HttpGet("{id}", Name = "Get")]
         public async Task<Destination> Get(int id)
         {
             return await _destinationService.GetDestinationById(id);
         }
 
-        // POST: api/VehiclesApiControllers
+        // POST: api/Destination/
         [HttpPost]
         public async Task Post([FromBody] Destination destination)
         {
             await _destinationService.AddDestination(destination);
+            Console.WriteLine((destination.Address));
+            Console.WriteLine("POSTED DESTINATION (DestinationController.cs)");
         }
 
-        // PUT: api/VehiclesApiControllers/5
+        // PUT: api/Destination/<id>
         [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] Destination destination)
         {
@@ -52,7 +53,7 @@ namespace Freight_calculator.Controllers
             await _destinationService.UpdateDestination(id, destination);
         }
 
-        // DELETE: api/VehiclesApiControllers/5
+        // DELETE: api/Destination/<id>
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
