@@ -17,14 +17,15 @@ namespace Freight_calculator.Models
         public int ZipCode { get; set; }
         
         public Auction? auction { get; set; }
-        
-        public string Zip { get; set; } // New
 
-        public string AuctionObjectId { get; set; }  // New
+        // Om man vill använda sig av konstiga format
+        public string Zip { get; set; } = "123 45"; // New
 
-        public double Distance2Destination { get; set; }  // New
+        public string AuctionObjectId { get; set; } = ""; // New
 
-        public double DeliveryCost { get; set; }  // New
+        public double Distance2Destination { get; set; } = 0.0;  // New
+
+        public double DeliveryCost { get; set; } = 0.0; // New
 
     }
 }

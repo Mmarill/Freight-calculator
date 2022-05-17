@@ -78,10 +78,10 @@ namespace Freight_calculator.Services
            
         }
 
-        public async Task Delete(int Id)
+        public Task Delete(int Id)
 
         {
-
+            
             throw new NotImplementedException();
         }
 
@@ -89,8 +89,10 @@ namespace Freight_calculator.Services
         // a Task ->  Deletes the destination from database
         {
             var destination = await dbContext.Destinations.FindAsync(id);
+            if (destination != null){ 
             dbContext.Destinations.Remove(destination);
             await dbContext.SaveChangesAsync();
+            }
         }
 
         public async Task<List<Destination>> GetAllDestinations()
