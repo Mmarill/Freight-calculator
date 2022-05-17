@@ -10,13 +10,23 @@ namespace Freight_calculator.Interfaces
 		// get destination by id
 		Task<Destination> GetDestinationById(int Id);
 
-		// add destination
+		// Adds a destination
 		Task AddDestination(Destination destination);
 
-		// uodate destination
+		// update destination
 		Task UpdateDestination(int Id, Destination destination);
 
 		// delete destination
 		Task DeleteDestination(int Id);
+		
+		// Calculates the cost 
+		double GetCost(double distanceInKm, double tariff);
+		
+		// Calculates the distance between two gps coordinates
+		double GetDistance(double lat1, double lon1, double lat2, double lon2);
+
+		
+
+
 	}
 }

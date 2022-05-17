@@ -1,0 +1,60 @@
+/*
+Earth radius is different on different Lat. This must be taken into consideration in Haversine algorithm.
+Consider Bearing change, which turns straight lines to arches (which are longer)
+Taking Speed change into account will turn arches to spirals (which are longer or shorter than arches)
+Altitude change will turn flat spirals to 3D spirals (which are longer again). This is very important for hilly areas.
+Below see the function in C which takes #1 and #2 into account:
+*/
+
+double   calcDistanceByHaversine(double rLat1, double rLon1, double rHeading1, double rLat2, double rLon2, double rHeading2){
+  double rDLatRad = 0.0;
+  double rDLonRad = 0.0;
+  double rLat1Rad = 0.0;
+  double rLat2Rad = 0.0;
+  double a = 0.0;
+  double c = 0.0;
+  double rResult = 0.0;
+  double rEarthRadius = 0.0;
+  double rDHeading = 0.0;
+  double rDHeadingRad = 0.0;
+
+  if ((rLat1 < -90.0) || (rLat1 > 90.0) || (rLat2 < -90.0) || (rLat2 > 90.0)
+              || (rLon1 < -180.0) || (rLon1 > 180.0) || (rLon2 < -180.0)
+              || (rLon2 > 180.0)) {
+        return -1;
+  };
+
+  rDLatRad = (rLat2 - rLat1) * DEGREE_TO_RADIANS;
+  rDLonRad = (rLon2 - rLon1) * DEGREE_TO_RADIANS;
+  rLat1Rad = rLat1 * DEGREE_TO_RADIANS;
+  rLat2Rad = rLat2 * DEGREE_TO_RADIANS;
+
+  a = sin(rDLatRad / 2) * sin(rDLatRad / 2) + sin(rDLonRad / 2) * sin(
+              rDLonRad / 2) * cos(rLat1Rad) * cos(rLat2Rad);
+
+  if (a == 0.0) {
+        return 0.0;
+  }
+
+  c = 2 * atan2(sqrt(a), sqrt(1 - a));
+  rEarthRadius = 6378.1370 - (21.3847 * 90.0 / ((fabs(rLat1) + fabs(rLat2))
+              / 2.0));
+  rResult = rEarthRadius * c;
+
+  // Chord to Arc Correction based on Heading changes. Important for routes with many turns and U-turns
+
+  if ((rHeading1 >= 0.0) && (rHeading1 < 360.0) && (rHeading2 >= 0.0)
+              && (rHeading2 < 360.0)) {
+        rDHeading = fabs(rHeading1 - rHeading2);
+        if (rDHeading > 180.0) {
+              rDHeading -= 180.0;
+        }
+        rDHeadingRad = rDHeading * DEGREE_TO_RADIANS;
+        if (rDHeading > 5.0) {
+              rResult = rResult * (rDHeadingRad / (2.0 * sin(rDHeadingRad / 2)));
+        } else {
+              rResult = rResult / cos(rDHeadingRad);
+        }
+  }
+  return rResult;
+}

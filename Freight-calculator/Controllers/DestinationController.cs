@@ -41,6 +41,7 @@ namespace Freight_calculator.Controllers
         public async Task Post([FromBody] Destination destination)
         {
             await _destinationService.AddDestination(destination);
+             
             Console.WriteLine((destination.Address));
             Console.WriteLine("POSTED DESTINATION (DestinationController.cs)");
         }
