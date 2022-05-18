@@ -4,12 +4,18 @@
     public class Delivery
 
     {
-        private (double, double) malmo = (55.5702828, 12.8758892);
+        private int id;
+
+        
+
+        private string address;
+        
         private string city;
         private string country;
         private string auctionId;
 
         private (double, double) destinationGPSPoint;
+        private (double, double) malmo = (55.5702828, 12.8758892);
 
         private double distanceInKm;
         private double deliveryCost;
@@ -28,10 +34,8 @@
             GetDistanceInKm(malmo.Item1, malmo.Item2, destinationGPSPoint.Item1, destinationGPSPoint.Item2);
             setDeliveryCost(distanceInKm);
 
-            // uppdate destination 
-            // 
-
-            // Write message done
+             
+            
 
             // SelfDestruct
         }

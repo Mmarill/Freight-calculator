@@ -8,6 +8,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Auction.cs" />
+    <Compile Remove="Models\Destination.cs" />
+    <Compile Remove="xxx\_Destination.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Google.Api.CommonProtos" Version="2.5.0" />
     <PackageReference Include="GoogleMaps.LocationServices" Version="1.2.0.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
