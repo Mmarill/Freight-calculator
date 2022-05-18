@@ -38,16 +38,15 @@ namespace Freight_calculator.Controllers
 
         // POST: api/Destination/
         [HttpPost]
-        public async Task Post([FromBody] Destination destination)
+        public async Task Post([FromBody] Destination destination )
         {
             await _destinationService.AddDestination(destination);
-             
-            Console.WriteLine((destination.Address));
-            Console.WriteLine("POSTED DESTINATION (DestinationController.cs)");
+ 
+
         }
 
-        // PUT: api/Destination/<id>
-        [HttpPut("{id}")]
+    // PUT: api/Destination/<id>
+    [HttpPut("{id}")]
         public async Task Put(int id, [FromBody] Destination destination)
         {
 

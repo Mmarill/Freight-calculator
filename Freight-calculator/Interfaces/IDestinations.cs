@@ -19,14 +19,5 @@ namespace Freight_calculator.Interfaces
 		// delete destination
 		Task DeleteDestination(int Id);
 		
-		// Calculates the cost 
-		double GetCost(double distanceInKm, double tariff);
-		
-		// Calculates the distance between two gps coordinates
-		double GetDistance(double lat1, double lon1, double lat2, double lon2);
-
-		
-
-
-	}
+		}
 }
