@@ -1,7 +1,6 @@
 ﻿using Freight_calculator.Data;
 using Freight_calculator.Interfaces;
 using Freight_calculator.Models;
-using Freight_calculator.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace Freight_calculator.Services
@@ -32,7 +31,7 @@ namespace Freight_calculator.Services
             Console.WriteLine("Address saved in database" + records + " affected.");
 
             // Trigger DeliveryService to return information about the delivery.
-            DeliveryService delivery = new DeliveryService(destination.Id,  destination.City, destination.Country, true);
+            Delivery delivery = new Delivery(destination.Id,  destination.City, destination.Country, true);
 
 
            
