@@ -21,7 +21,7 @@
         private double? tariff;
         private double? fixedCosts;
         private double? deliveryCost = 0;
-
+        
         private bool verboseMode = true;
 
 
@@ -44,8 +44,8 @@
         public double? FixedCosts { get => fixedCosts; set => fixedCosts = value; }
 
         public double? DistanceInKm { get => distanceInKm; set => distanceInKm = value; }
-        public Point2D DestinationGPSPoint { get => destinationGPSPoint; set => destinationGPSPoint = value; }
-        public Point2D AuctionGPSPoint { get => auctionGPSPoint; set => auctionGPSPoint = value; }
+        public Point2D? DestinationGPSPoint { get => destinationGPSPoint; set => destinationGPSPoint = value; }
+        public Point2D? AuctionGPSPoint { get => auctionGPSPoint; set => auctionGPSPoint = value; }
         public bool VerboseMode { get => verboseMode; set => verboseMode = value; }
 
         public Delivery()
@@ -77,10 +77,10 @@
         public double calculateDistanceInKm(Point2D GPSPoint1, Point2D GPSPoint2)
         // A ruff estiamtion formula for calculating distance: Haversine formula with no radian compensation
         {
-            double long1 = GPSPoint1.item1;
-            double lat1 = GPSPoint2.item2;
-            double long2 = GPSPoint2.item1;
-            double lat2 = GPSPoint2.item2;
+            double long1 = GPSPoint1.X;
+            double lat1 = GPSPoint2.Y;
+            double long2 = GPSPoint2.X;
+            double lat2 = GPSPoint2.Y;
             
             double _eQuatorialEarthRadius = 6378.1370D;
             double _d2r = Math.PI / 180D;
