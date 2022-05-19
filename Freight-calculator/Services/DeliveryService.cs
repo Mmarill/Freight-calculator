@@ -78,20 +78,18 @@ namespace Freight_calculator.Services
 
             destinationObj.AuctionId = delivery.AuctionId;
 
-            destinationObj.DestinationGPSPoint = delivery.DestinationGPSPoint;
+            destinationObj.DestinationGPSPoint = delivery.address2GPSPoint(delivery.City, delivery.Country);
+            Console.WriteLine(destinationObj.DestinationGPSPoint.X); // DEBUG
             destinationObj.AuctionGPSPoint = delivery.AuctionGPSPoint;
 
-            destinationObj.DistanceInKm = delivery.DistanceInKm;
+            destinationObj.DistanceInKm = delivery.calculateDistanceInKm(delivery.AuctionGPSPoint, delivery.DestinationGPSPoint);
+
             destinationObj.Dilivered = delivery.Dilivered;
 
             destinationObj.Tariff = delivery.Tariff;
             destinationObj.FixedCosts = delivery.FixedCosts;
 
-            destinationObj.DistanceInKm = delivery.DistanceInKm;
-
-
-            destinationObj.AuctionGPSPoint = delivery.AuctionGPSPoint;
-            destinationObj.DestinationGPSPoint = delivery.DestinationGPSPoint;
+            destinationObj.DeliveryCost = delivery.calculateDeliveryCost(delivery.DistanceInKm.Value, delivery.Tariff.Value);
             
             destinationObj.VerboseMode = delivery.VerboseMode;
 

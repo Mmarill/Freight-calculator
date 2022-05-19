@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Freight_calculator.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20220519134642_InitCreate")]
-    partial class InitCreate
+    [Migration("20220519181706_511")]
+    partial class _511
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

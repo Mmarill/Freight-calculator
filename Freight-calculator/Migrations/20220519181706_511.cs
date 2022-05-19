@@ -4,7 +4,7 @@
 
 namespace Freight_calculator.Migrations
 {
-    public partial class InitCreate : Migration
+    public partial class _511 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
