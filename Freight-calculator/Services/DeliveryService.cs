@@ -16,7 +16,7 @@ namespace Freight_calculator.Services
 
         
 
-        public async Task AddDestination(Delivery aDelivery)
+        public async Task AddDelivery(Delivery aDelivery)
         // Adds a destination to SQL Database
         {
             
@@ -54,7 +54,7 @@ namespace Freight_calculator.Services
             }
         }
 
-        public async Task<List<Delivery>> GetAllDelivery()
+        public async Task<List<Delivery>> GetAllDeliveries()
         //  a Task ->  Gets all the delveries in database
         {
             var deliverys = await dbContext.Deliveries.ToListAsync();

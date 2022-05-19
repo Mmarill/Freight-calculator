@@ -2,8 +2,7 @@
 
 namespace Freight_calculator.Interfaces
 {
-    public interface IDeliverys
-    {
+   
 		public interface IDeliverys
 		{
 			// get all deliverys
@@ -23,4 +22,3 @@ namespace Freight_calculator.Interfaces
 
 		}
 	}
-}

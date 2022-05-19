@@ -2,22 +2,22 @@
 
 namespace Freight_calculator.Interfaces
 {
-    public interface IDestinations
+    public interface IDeliverys
     {
 		// get all destinations
-		Task<List<Destination>> GetAllDestinations();
+		Task<List<Delivery>> GetAllDeliveries();
 
 		// get destination by id
-		Task<Destination> GetDestinationById(int Id);
+		Task<Delivery> GetDeliveryById(int Id);
 
-		// Adds a destination
-		Task AddDestination(Destination destination);
+		// add destination
+		Task AddDelivery(Delivery delivery);
 
-		// update destination
-		Task UpdateDestination(int Id, Destination destination);
+		// uodate destination
+		Task UpdateDelivery(int Id, Delivery delivery
+			);
 
 		// delete destination
-		Task DeleteDestination(int Id);
-		
-		}
+		Task DeleteDelivery(int Id);
+	}
 }

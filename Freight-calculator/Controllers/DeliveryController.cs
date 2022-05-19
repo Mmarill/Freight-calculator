@@ -33,14 +33,14 @@ namespace Freight_calculator.Controllers
         [HttpGet("{id}", Name = "Get")]
         public async Task<Delivery> Get(int id)
         {
-            return await _deliveryService.GetDestinationById(id);
+            return await _deliveryService.GetDeliveryById(id);
         }
 
         // POST: api/Destination/
         [HttpPost]
         public async Task Post([FromBody] Delivery delivery )
         {
-            await _deliveryService.AddDestination(delivery);
+            await _deliveryService.AddDelivery(delivery);
  
 
         }
@@ -50,14 +50,14 @@ namespace Freight_calculator.Controllers
         public async Task Put(int id, [FromBody] Delivery delivery)
         {
 
-            await _deliveryService.UpdateDestination(id, delivery);
+            await _deliveryService.UpdateDelivery(id, delivery);
         }
 
         // DELETE: api/Destination/<id>
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            await _deliveryService.DeleteDestination(id);
+            await _deliveryService.DeleteDelivery(id);
         }
     }
 }
