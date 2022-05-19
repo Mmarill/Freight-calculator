@@ -44,31 +44,31 @@ namespace Freight_calculator.Services
             throw new NotImplementedException();
         }
 
-        public async Task DeleteDestination(int id)
+        public async Task DeleteDelivery(int id)
         // a Task ->  Deletes the destination from database
         {
-            var destination = await dbContext.Deliveries.FindAsync(id);
-            if (destination != null){ 
-            dbContext.Deliveries.Remove(destination);
+            var delivery = await dbContext.Deliveries.FindAsync(id);
+            if (delivery != null){ 
+            dbContext.Deliveries.Remove(delivery);
             await dbContext.SaveChangesAsync();
             }
         }
 
-        public async Task<List<Delivery>> GetAllDestinations()
-        //  a Task ->  Gets all the destinations in database
+        public async Task<List<Delivery>> GetAllDelivery()
+        //  a Task ->  Gets all the delveries in database
         {
-            var destinations = await dbContext.Deliveries.ToListAsync();
-            return destinations;
+            var deliverys = await dbContext.Deliveries.ToListAsync();
+            return deliverys;
         }
-        public async Task<Delivery> GetDestinationById(int id)
-        //  a Task -> Gets a destination by its id
+        public async Task<Delivery> GetDeliveryById(int id)
+        //  a Task -> Gets a delivery by its id
         {
-            var destination = await dbContext.Deliveries.FindAsync(id);
-            return destination;
+            var delivery = await dbContext.Deliveries.FindAsync(id);
+            return delivery;
         }
 
-        public async Task UpdateDestination(int id, Delivery delivery)
-        //  a Task -> Updates a destination by its id
+        public async Task UpdateDelivery(int id, Delivery delivery)
+        //  a Task -> Updates a delivery by its id
         {
             var destinationObj = await dbContext.Deliveries.FindAsync(id);
             destinationObj.Address = delivery.Address;
