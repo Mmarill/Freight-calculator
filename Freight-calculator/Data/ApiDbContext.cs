@@ -16,7 +16,7 @@ namespace Freight_calculator.Data
                 base.OnConfiguring(optionsBuilder);
                 //remove
 
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=ApiDbMS;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Database=ApiDbMSv2;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
                 // 
                 // server object explorer windows
             }

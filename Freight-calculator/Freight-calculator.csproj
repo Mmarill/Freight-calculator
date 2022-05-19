@@ -8,9 +8,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="xxx\**" />
+    <Content Remove="xxx\**" />
+    <EmbeddedResource Remove="xxx\**" />
+    <None Remove="xxx\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Interfaces\IDestinations.cs" />
+    <Compile Remove="Migrations\ApiDbContextModelSnapshot.cs" />
     <Compile Remove="Models\Auction.cs" />
     <Compile Remove="Models\Destination.cs" />
-    <Compile Remove="xxx\_Destination.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,6 +35,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

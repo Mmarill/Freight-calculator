@@ -8,56 +8,56 @@ namespace Freight_calculator.Controllers
    
     [Route("api/[controller]")]
     [ApiController]
-    public class DestinationController : ControllerBase
+    public class DeliveryController : ControllerBase
     {
-        private IDestinations _destinationService;
+        private IDeliverys _deliveryService;
         // get interface
 
         // inject interface in this structure
-        public DestinationController(IDestinations destinationService)
+        public DeliveryController(IDeliverys deliveryService)
         {
-            _destinationService = destinationService;
+            _deliveryService = deliveryService;
         }
 
         // currently returnign a listof strings
         [HttpGet]
-        public async Task<IEnumerable<Destination>> Get()
+        public async Task<IEnumerable<Delivery>> Get()
         {
-            var destinations = await _destinationService.GetAllDestinations();
+            var deliveries = await _deliveryService.GetAllDeliveries();
             // get all destinations in db
             // need to use Task
-            return destinations;
+            return deliveries;
         }
 
         // GET: api/Destination/<id>       
         [HttpGet("{id}", Name = "Get")]
-        public async Task<Destination> Get(int id)
+        public async Task<Delivery> Get(int id)
         {
-            return await _destinationService.GetDestinationById(id);
+            return await _deliveryService.GetDestinationById(id);
         }
 
         // POST: api/Destination/
         [HttpPost]
-        public async Task Post([FromBody] Destination destination )
+        public async Task Post([FromBody] Delivery delivery )
         {
-            await _destinationService.AddDestination(destination);
+            await _deliveryService.AddDestination(delivery);
  
 
         }
 
     // PUT: api/Destination/<id>
     [HttpPut("{id}")]
-        public async Task Put(int id, [FromBody] Destination destination)
+        public async Task Put(int id, [FromBody] Delivery delivery)
         {
 
-            await _destinationService.UpdateDestination(id, destination);
+            await _deliveryService.UpdateDestination(id, delivery);
         }
 
         // DELETE: api/Destination/<id>
         [HttpDelete("{id}")]
         public async Task Delete(int id)
         {
-            await _destinationService.DeleteDestination(id);
+            await _deliveryService.DeleteDestination(id);
         }
     }
 }
