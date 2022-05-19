@@ -7,7 +7,7 @@ namespace Freight_calculator.Data
         public class ApiDbContext : DbContext
 
         {
-            public DbSet<Destination> Destinations { get; set; }
+            public DbSet<Delivery> Deliveries { get; set; }
 
             // connections to string to this db contex class
             // override OnConfi...

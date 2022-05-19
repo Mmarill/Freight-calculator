@@ -16,9 +16,7 @@ builder.Services.AddCors(options =>
 
 
 // Add services to the container.
-builder.Services.AddScoped<IDestinations, DestinationService>();
-Location location = new Location();
-Console.WriteLine(location.GetLatLng("Malmö, Sverige"));
+builder.Services.AddScoped<IDeliverys, DeliveryService>();
 builder.Services.AddControllers();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

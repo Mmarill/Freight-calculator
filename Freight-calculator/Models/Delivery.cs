@@ -4,56 +4,84 @@
     public class Delivery
 
     {
+
         private int id;
+        private string? address = "None";        
+        private string city = "None";
+        private string? zipCode = "None";
+        private string country = "None";
+        private string auctionId = "None";
+
+        private Point2D? destinationGPSPoint = new Point2D(52.3789004443169, 4.892281168298614); // ;)
+        private Point2D? auctionGPSPoint = new Point2D(55.5702828, 12.8758892); // Malmö
+
+        private double? distanceInKm = 0;
+        private bool? dilivered = false;
+
+        private double? tariff;
+        private double? fixedCosts;
+        private double? deliveryCost = 0;
+
+        private bool verboseMode = true;
+
+
+        public int Id { get => id; set => id = value; }
+        public string? Address { get => address; set => address = value; }
+        public string City { get => city; set => city = value; }
+        public string? ZipCode { get => zipCode; set => zipCode = value; }
+        public string Country { get => country; set => country = value; }
+        
+        public string AuctionId { get => auctionId; set => auctionId = value; }
 
         
-
-        private string address;
         
-        private string city;
-        private string country;
-        private string auctionId;
+        
+        public double? DeliveryCost { get => deliveryCost; set => deliveryCost = value; }
+        public bool? Dilivered { get => dilivered; set => dilivered = value; }
+        
+        
+        public double? Tariff { get => tariff; set => tariff = value; }
+        public double? FixedCosts { get => fixedCosts; set => fixedCosts = value; }
 
-        private (double, double) destinationGPSPoint;
-        private (double, double) malmo = (55.5702828, 12.8758892);
+        public double? DistanceInKm { get => distanceInKm; set => distanceInKm = value; }
+        public Point2D DestinationGPSPoint { get => destinationGPSPoint; set => destinationGPSPoint = value; }
+        public Point2D AuctionGPSPoint { get => auctionGPSPoint; set => auctionGPSPoint = value; }
+        public bool VerboseMode { get => verboseMode; set => verboseMode = value; }
 
-        private double distanceInKm;
-        private double deliveryCost;
-
-        private bool verboseMode;
-
-        public Delivery(int destinationId, string city, string country, bool verbose = true)
+        public Delivery()
         {
-            verboseMode = verbose;
 
-            this.city = city;
-            this.country = country;
 
             // Populate the rest of the fields
-            getGPSPoint(city, country);
-            GetDistanceInKm(malmo.Item1, malmo.Item2, destinationGPSPoint.Item1, destinationGPSPoint.Item2);
-            setDeliveryCost(distanceInKm);
-
-             
             
 
-            // SelfDestruct
+            this.DestinationGPSPoint = address2GPSPoint(city, country);
+            this.DistanceInKm = calculateDistanceInKm(this.AuctionGPSPoint, this.DestinationGPSPoint);
+            this.DeliveryCost = calculateDeliveryCost(this.DistanceInKm.Value, this.Tariff.Value, this.FixedCosts.Value);
+            
         }
 
-        public double setDeliveryCost(double distanceInKm, double tariff = 5.0, double fixedCosts = 99)
+        
+        public double calculateDeliveryCost(double distanceInKm, double tariff = 5.0, double fixedCosts = 99)
         // Some formula for get the Delivery Cost
         {
-            deliveryCost = distanceInKm * tariff + fixedCosts;
+            DeliveryCost = distanceInKm * tariff + fixedCosts;
 
-            if (verboseMode) { Console.WriteLine("Total Delivery Cost: " + deliveryCost + " SEK"); }
+            if (this.VerboseMode) { Console.WriteLine("Total Delivery Cost: " + DeliveryCost + " SEK"); }
 
-            return deliveryCost;
+            double ret = DeliveryCost.Value;
+            return ret;
         }
 
-        public double GetDistanceInKm(double lat1, double long1, double lat2, double long2)
+
+        public double calculateDistanceInKm(Point2D GPSPoint1, Point2D GPSPoint2)
         // A ruff estiamtion formula for calculating distance: Haversine formula with no radian compensation
         {
-
+            double long1 = GPSPoint1.item1;
+            double lat1 = GPSPoint2.item2;
+            double long2 = GPSPoint2.item1;
+            double lat2 = GPSPoint2.item2;
+            
             double _eQuatorialEarthRadius = 6378.1370D;
             double _d2r = Math.PI / 180D;
 
@@ -63,24 +91,26 @@
             double c = 2D * Math.Atan2(Math.Sqrt(a), Math.Sqrt(1D - a));
             double d = _eQuatorialEarthRadius * c;
 
-            if (verboseMode) { Console.WriteLine("Calculated distance between Warehouse Malmö to Destination with UAV transport ltd: " + d); }
+            if ((bool)VerboseMode) { Console.WriteLine("Calculated distance between Warehouse Malmö to Destination with UAV transport ltd: " + d); }
 
+            this.DistanceInKm = d;
+            
             return d;
         }
 
-        public (double, double) getGPSPoint(string city, string country)
+        public Point2D address2GPSPoint(string city, string country)
         // Calculate gps coordinates of a given address
         {
-            string addr = this.city + "," + this.country;
+            string addr = this.City + "," + this.Country;
 
             // Create a new Location instance if (verboseMode) { }
             Location location = new Location();
 
             // Set destionationGPSPoint
-            destinationGPSPoint = location.GetLatLng(addr);
+            DestinationGPSPoint = location.GetLatLng(addr);
 
-            if (verboseMode) { Console.WriteLine("The address has GPS Point: (" + destinationGPSPoint + " )"); }
-            return destinationGPSPoint;
+            if (VerboseMode) { Console.WriteLine("The address has GPS Point: (" + DestinationGPSPoint + " )"); }
+            return DestinationGPSPoint;
         }
 
     }
