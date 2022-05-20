@@ -12,7 +12,7 @@ namespace Freight_calculator.Interfaces
 			Task<Delivery> GetDeliveryById(int Id);
 
 			// Adds a new Delivery 
-			Task AddDelivery(Delivery delivery);
+			Task<object> AddDelivery(Delivery delivery);
 
 			// Updates the delivery
 			Task UpdateDelivery(int Id, Delivery delivery);

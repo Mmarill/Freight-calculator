@@ -16,7 +16,7 @@ namespace Freight_calculator.Services
 
         
 
-        public async Task AddDelivery(Delivery aDelivery)
+        public async Task<object> AddDelivery(Delivery aDelivery)
         // Adds a destination to SQL Database
         {
             Delivery delivery = new Delivery();
@@ -43,7 +43,7 @@ namespace Freight_calculator.Services
             // Delivery delivery = new Delivery(aDelivery.id,  aDelivery.City, aDelivery.Country, true);
 
 
-           
+            return delivery;
         }
 
         

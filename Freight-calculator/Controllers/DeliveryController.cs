@@ -38,9 +38,9 @@ namespace Freight_calculator.Controllers
 
         // POST: api/Destination/
         [HttpPost]
-        public async Task Post([FromBody] Delivery delivery )
+        public async Task<object> Post([FromBody] Delivery delivery )
         {
-            await _deliveryService.AddDelivery(delivery);
+            return await _deliveryService.AddDelivery(delivery);
  
 
         }
