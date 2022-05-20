@@ -19,9 +19,19 @@ namespace Freight_calculator.Services
         public async Task AddDelivery(Delivery aDelivery)
         // Adds a destination to SQL Database
         {
+            Delivery delivery = new Delivery();
             
-            Console.WriteLine("Recieved Address: " + aDelivery.Address + ", Zip: " + aDelivery.ZipCode + " City: " + aDelivery.City + " Country: " + aDelivery.Country);
-               
+            Console.WriteLine("Recieved Address: " + aDelivery.Adress + ", Zip: " + aDelivery.ZipCode + " City: " + aDelivery.City + " Country: " + aDelivery.Country);
+            Point2D DestinationGPSPoint = new Point2D();
+            Point2D AuctionGPSPoint = new Point2D(55.5700886, 12.8758906);
+            
+            DestinationGPSPoint = delivery.address2GPSPoint(aDelivery.City, aDelivery.Country);
+            Console.WriteLine(DestinationGPSPoint);
+
+            aDelivery.DistanceInKm = delivery.calculateDistanceInKm(AuctionGPSPoint, DestinationGPSPoint);
+
+            aDelivery.DeliveryCost = delivery.calculateDeliveryCost((double)aDelivery.DistanceInKm, (Double)delivery.Tariff, (Double)delivery.FixedCosts);
+
             // Track Entity (Destination) 
             await dbContext.Deliveries.AddAsync(aDelivery);
 
@@ -71,18 +81,13 @@ namespace Freight_calculator.Services
         //  a Task -> Updates a delivery by its id
         {
             var destinationObj = await dbContext.Deliveries.FindAsync(id);
-            destinationObj.Address = delivery.Address;
+            destinationObj.Adress = delivery.Adress;
             destinationObj.City = delivery.City;
             destinationObj.ZipCode = delivery.ZipCode;
             destinationObj.Country = delivery.Country;
 
             destinationObj.AuctionId = delivery.AuctionId;
 
-            destinationObj.DestinationGPSPoint = delivery.address2GPSPoint(delivery.City, delivery.Country);
-            Console.WriteLine(destinationObj.DestinationGPSPoint.X); // DEBUG
-            destinationObj.AuctionGPSPoint = delivery.AuctionGPSPoint;
-
-            destinationObj.DistanceInKm = delivery.calculateDistanceInKm(delivery.AuctionGPSPoint, delivery.DestinationGPSPoint);
 
             destinationObj.Dilivered = delivery.Dilivered;
 
@@ -119,6 +124,8 @@ namespace Freight_calculator.Services
             Console.Write("number of records affected: " + records);
             Console.WriteLine(" records affected when added calculations: Travel Distance to delivery and Delivery cost.");
         }*/
+
+
     }
 
 }

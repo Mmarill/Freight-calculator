@@ -11,7 +11,6 @@ namespace Freight_calculator.Models
 
         public Point2D(double x = 0, double y = 0)
         {
-            
             X = x;
             Y = y;
         }

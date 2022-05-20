@@ -6,8 +6,7 @@ namespace Freight_calculator.Data
         // config för databas
         public class ApiDbContext : DbContext
 
-        {
-        public DbSet<Point2D>? GPSPoints { get; set; }   
+        { 
         public DbSet<Delivery> Deliveries { get; set; }
             
 

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Freight_calculator.Migrations
 {
     [DbContext(typeof(ApiDbContext))]
-    [Migration("20220519181706_511")]
-    partial class _511
+    [Migration("20220520001642_InitCreate")]
+    partial class InitCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -32,11 +32,9 @@ namespace Freight_calculator.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("Adress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("AuctionGPSPointId")
-                        .HasColumnType("int");
 
                     b.Property<string>("AuctionId")
                         .IsRequired()
@@ -52,9 +50,6 @@ namespace Freight_calculator.Migrations
 
                     b.Property<double?>("DeliveryCost")
                         .HasColumnType("float");
-
-                    b.Property<int?>("DestinationGPSPointId")
-                        .HasColumnType("int");
 
                     b.Property<bool?>("Dilivered")
                         .HasColumnType("bit");
@@ -76,45 +71,7 @@ namespace Freight_calculator.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AuctionGPSPointId");
-
-                    b.HasIndex("DestinationGPSPointId");
-
                     b.ToTable("Deliveries");
-                });
-
-            modelBuilder.Entity("Freight_calculator.Models.Point2D", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<double>("X")
-                        .HasColumnType("float");
-
-                    b.Property<double>("Y")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GPSPoints");
-                });
-
-            modelBuilder.Entity("Freight_calculator.Models.Delivery", b =>
-                {
-                    b.HasOne("Freight_calculator.Models.Point2D", "AuctionGPSPoint")
-                        .WithMany()
-                        .HasForeignKey("AuctionGPSPointId");
-
-                    b.HasOne("Freight_calculator.Models.Point2D", "DestinationGPSPoint")
-                        .WithMany()
-                        .HasForeignKey("DestinationGPSPointId");
-
-                    b.Navigation("AuctionGPSPoint");
-
-                    b.Navigation("DestinationGPSPoint");
                 });
 #pragma warning restore 612, 618
         }

@@ -17,7 +17,6 @@ namespace Freight_calculator.Models
 
         // Mandatory -> gps coord.. Make it not nullable next migration/update
         public string? Country { get; set; } = null;
-        
        
         public int ZipCode { get; set; }
         
