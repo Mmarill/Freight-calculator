@@ -66,7 +66,7 @@
             this.deliveryCost = deliveryCost = 0;
             this.verboseMode = verboseMode;
 
-            this.auctionGPSPoint = new Point2D(55.5702828, 12.8758892);
+            this.auctionGPSPoint = null;
             this.destinationGPSPoint = destinationGPSPoint;
             this.distanceInKm = distanceInKm;
             

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Freight_calculator.Services
 {
     public class DeliveryService : IDeliverys  
+        // Sätter AuctionGPSPoint i AddDelivery 
     {
         private ApiDbContext dbContext;
 
@@ -20,10 +21,36 @@ namespace Freight_calculator.Services
         // Adds a destination to SQL Database
         {
             
+           
             Console.WriteLine("Recieved Address: " + aDelivery.Address + ", Zip: " + aDelivery.ZipCode + " City: " + aDelivery.City + " Country: " + aDelivery.Country);
                
             // Track Entity (Destination) 
             await dbContext.Deliveries.AddAsync(aDelivery);
+
+            
+                
+                // Address to AuctionGPSPoint
+                aDelivery.AuctionGPSPoint = new Point2D(55.5702828, 12.8758892);
+                // Address to DestinationPoint
+                aDelivery.DestinationGPSPoint = aDelivery.address2GPSPoint(aDelivery.City, aDelivery.Country);
+                
+                // Now we can calculate distance
+                aDelivery.DistanceInKm = aDelivery.calculateDistanceInKm(aDelivery.AuctionGPSPoint, aDelivery.DestinationGPSPoint);
+
+                // Now we can calculate the cost
+                aDelivery.DeliveryCost = aDelivery.calculateDeliveryCost(aDelivery.DistanceInKm.Value, aDelivery.Tariff.Value, aDelivery.FixedCosts.Value);
+
+
+                Console.WriteLine("1. AuctionGPSPoint = new Point2D(55.5702828, 12.8758892: " + aDelivery.AuctionGPSPoint.X, aDelivery.AuctionGPSPoint.Y + "( X, Y");
+                Console.WriteLine("2. DestinationGPSPoint = aDelivery.address2GPSPoint(aDelivery.City, aDelivery.Country): " +
+                    aDelivery.DestinationGPSPoint.X, aDelivery.DestinationGPSPoint.Y + " (X, Y)");
+                Console.WriteLine("3. DistanceInKm = aDelivery.calculateDistanceInKm(aDelivery.AuctionGPSPoint, aDelivery.DestinationGPSPoint: " +
+                    aDelivery.DistanceInKm.Value + "(double)");
+                Console.WriteLine("DeliveryCost = aDelivery.calculateDeliveryCost(aDelivery.DistanceInKm.Value, aDelivery.Tariff.Value, aDelivery.FixedCosts.Value)" +
+                    aDelivery.DeliveryCost.Value + "(double) DeliveryCost = distanceInKm * tariff + fixedCosts");
+
+                
+            
 
             // Save address in database
             int records = await dbContext.SaveChangesAsync();
