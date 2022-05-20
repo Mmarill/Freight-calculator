@@ -12,14 +12,14 @@
         private string country = "Sverige";
         private string auctionId = "None";
 
-        private Point2D? destinationGPSPoint = new Point2D(0, 0); 
-        private Point2D? auctionGPSPoint = new Point2D(55.5702828, 12.8758881); 
+        private Point2D? destinationGPSPoint = new Point2D(0.0,0.0); // MÅSTE SKAPA En instans på något ställe
+        private Point2D? auctionGPSPoint = new Point2D(55.5702828, 12.8758881); // MÅSTE SKAPA En instans på något ställe
 
         private double? distanceInKm = 0;
         private bool? dilivered = false;
         
-        private double? tariff = 5.50;
-        private double? fixedCosts= 130;
+        private double? tariff = 5.0;
+        private double? fixedCosts= 100;
         private double? deliveryCost = 0;
         
         private bool verboseMode = true;
@@ -63,31 +63,47 @@
             this.dilivered = dilivered;
             this.tariff = tariff;
             this.fixedCosts = fixedCosts;
-            this.deliveryCost = deliveryCost;
+            this.deliveryCost = deliveryCost = 0;
             this.verboseMode = verboseMode;
 
             this.auctionGPSPoint = new Point2D(55.5702828, 12.8758892);
             this.destinationGPSPoint = destinationGPSPoint;
             this.distanceInKm = distanceInKm;
             
-            if (distanceInKm < 1)
+            AuctionGPSPoint = default; // Skapas med default Point2D(0,0) i instansvariabeln
+            Console.WriteLine("Constructor: AuctionGPSPoint set to default Point2D(55.5702828, 12.8758881");
+            
+
+
+            if (destinationGPSPoint == default)
             {
-                 
-
-                this.destinationGPSPoint = address2GPSPoint(city, country);
-
-                this.distanceInKm = calculateDistanceInKm(this.auctionGPSPoint, this.destinationGPSPoint);
-
-                this.deliveryCost = calculateDeliveryCost((Double)this.distanceInKm, (Double)this.tariff, (Double)this.fixedCosts);
+                DestinationGPSPoint = this.address2GPSPoint(city, country);
+                Console.WriteLine("Constructor: address2GPSPoint called " + city+", " + country);
             }
-            
-            
-            
-            
-
+            else DestinationGPSPoint = destinationGPSPoint;
 
             
+            if (distanceInKm == default)
+            {
+                DistanceInKm = calculateDistanceInKm(AuctionGPSPoint, DestinationGPSPoint);
+                Console.WriteLine("Constructor: calculateDistanceInKm called " + AuctionGPSPoint.X, AuctionGPSPoint.Y + DestinationGPSPoint.X, DestinationGPSPoint.Y);
+
             }
+
+            if (deliveryCost == default)
+            {
+                DeliveryCost = calculateDeliveryCost(DistanceInKm.Value, Tariff.Value, FixedCosts.Value);
+                Console.WriteLine("Constructor: calculateDeliveryCost called" , DistanceInKm.Value, Tariff.Value, FixedCosts.Value);
+            }
+        }
+            
+            
+            
+            
+
+
+            
+            
 
         
     

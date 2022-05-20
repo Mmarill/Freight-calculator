@@ -12,8 +12,11 @@ namespace Freight_calculator.Models
 
             var latitude = point.Latitude;
             var longitude = point.Longitude;
-            Point2D GPSPoint = new Point2D(latitude, longitude);
-            return GPSPoint;
+            Point2D gPSPoint = new Point2D();
+            gPSPoint.X = (double)latitude;
+            gPSPoint.Y = (double)longitude;
+            Console.WriteLine("Location: " + gPSPoint.X + ", " + gPSPoint.Y);
+            return  gPSPoint ;
         }
     }
     }
