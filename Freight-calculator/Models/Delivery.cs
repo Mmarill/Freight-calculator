@@ -36,7 +36,6 @@
         public double? DistanceInKm { get => distanceInKm; set => distanceInKm = value; }
         public bool VerboseMode { get => verboseMode; set => verboseMode = value; }
 
-        public Delivery() { }
         public Delivery(int id, string? city = default, string? country = default, string? auctionId = default, string? address = default, string? zipCode = default, double? distanceInKm = default, bool dilivered = default, double tariff = 0.0, double fixedCosts = default, double deliveryCost = default, bool verboseMode = default)
         {
             this.id = id;
@@ -54,9 +53,12 @@
             
             this.distanceInKm = distanceInKm;
 
-            
-
         }
+
+        public Delivery()
+        {
+        }
+
         public double? calculateDistanceInKm(Point2D? auctionGPSPoint, Point2D? destinationGPSPoint)
         // A ruff estiamtion formula for calculating distance: Haversine formula with no radian compensation
         {

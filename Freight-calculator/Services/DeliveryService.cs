@@ -43,7 +43,7 @@ namespace Freight_calculator.Services
             // Delivery delivery = new Delivery(aDelivery.id,  aDelivery.City, aDelivery.Country, true);
 
 
-            return delivery;
+            return aDelivery;
         }
 
         
